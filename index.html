@@ -1,108 +1,340 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Jarvis – Sistema Bandini</title>
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0a0a0a;
-    color: #ffffff;
-}
-header {
-    text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-}
-h1 {
-    font-size: 48px;
-    margin: 0;
-}
-h2 {
-    margin-top: 40px;
-}
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-}
-.section {
-    margin-bottom: 40px;
-}
-a {
-    color: #00d4ff;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-.card {
-    background: #1a1a1a;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-</style>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarvis – Sistema Bandini</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg2: #121821;
+      --card: #171e28;
+      --text: #f2f5f7;
+      --muted: #b8c2cc;
+      --line: #2a3542;
+      --accent: #4fc3f7;
+      --accent2: #7ee787;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, var(--bg), #0d131b 35%, var(--bg));
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 70px 20px 50px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 54px;
+      letter-spacing: 3px;
+    }
+
+    header .subtitle {
+      margin-top: 12px;
+      font-size: 20px;
+      color: #e4f4fb;
+    }
+
+    header .motto {
+      margin-top: 18px;
+      font-style: italic;
+      color: #d6edf8;
+      font-size: 17px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 36px 20px 70px;
+    }
+
+    .intro {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 14px;
+      font-size: 28px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      color: #ffffff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+    }
+
+    .card p {
+      margin: 0 0 12px 0;
+      color: var(--muted);
+    }
+
+    .label {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(79, 195, 247, 0.14);
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .label.green {
+      background: rgba(126, 231, 135, 0.14);
+      color: var(--accent2);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .links a {
+      margin-right: 16px;
+      display: inline-block;
+      margin-top: 6px;
+    }
+
+    .note {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      background: rgba(79, 195, 247, 0.08);
+      border-radius: 8px;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px 40px;
+      color: #9fb0bf;
+      font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.18);
+    }
+
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 42px;
+      }
+
+      header .subtitle {
+        font-size: 18px;
+      }
+
+      .container {
+        padding: 28px 16px 60px;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<header>
+  <header>
     <h1>JARVIS</h1>
-    <p>Sistema Evolutivo – Intelligenza in crescita continua</p>
-</header>
+    <div class="subtitle">Sistema Bandini – Hub scientifico e progettuale</div>
+    <div class="motto">«La verità non sta mai nel comune sentire»</div>
+  </header>
 
-<div class="container">
+  <main class="container">
 
-<div class="section">
-<h2>👤 Autore</h2>
-<div class="card">
-<p><strong>Luca Bandini</strong><br>
-Ricercatore indipendente<br>
-Sistema Bandini</p>
-<p>
-<a href="#">ORCID</a> |
-<a href="#">Giornalismo Libero</a>
-</p>
-</div>
-</div>
+    <section class="intro">
+      <h3>Luca Bandini</h3>
+      <p>
+        Ricercatore teorico indipendente, autore e ideatore del Sistema Bandini:
+        un ecosistema interdisciplinare che collega cosmologia, metrologia universale,
+        accessibilità biologica, tempo emergente e sviluppo del progetto Jarvis.
+      </p>
+      <div class="links">
+        <a href="https://orcid.org/0000-0003-4545-9862" target="_blank">ORCID: 0000-0003-4545-9862</a>
+        <a href="https://giornalismolibero.com/" target="_blank">Giornalismo Libero</a>
+      </div>
+    </section>
 
-<div class="section">
-<h2>🔬 Pubblicazioni Scientifiche</h2>
+    <section>
+      <h2>Identità del progetto</h2>
+      <div class="card">
+        <p>
+          Jarvis è il punto centrale di raccolta e presentazione del Sistema Bandini.
+          Questo sito nasce come interfaccia pubblica unificata per collegare articoli,
+          modelli teorici, lavori pubblicati su Zenodo e sviluppi futuri in una struttura coerente,
+          leggibile e progressivamente espandibile.
+        </p>
+      </div>
+    </section>
 
-<div class="card">
-<p><strong>Teoria del Residuo Madre (RM)</strong><br>
-<a href="#">Vai al paper su Zenodo</a></p>
-</div>
+    <section>
+      <h2>Nucleo cosmologico</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="label">Cosmologia</div>
+          <h3>Teoria del Residuo Madre (RM)</h3>
+          <p>
+            Modello cosmologico alternativo orientato a una rilettura unificata dei fenomeni
+            comunemente attribuiti a materia oscura ed energia oscura.
+          </p>
+          <a href="https://zenodo.org/records/18714894" target="_blank">Apri su Zenodo</a>
+        </div>
 
-<div class="card">
-<p><strong>Antropic Unit (AU)</strong><br>
-<a href="#">Vai al paper su Zenodo</a></p>
-</div>
+        <div class="card">
+          <div class="label">Open Review</div>
+          <h3>Residuo Madre – Public Open Review Edition</h3>
+          <p>
+            Edizione pubblica pensata come base di revisione aperta, confronto esteso
+            e accesso diretto alla struttura teorica del modello RM.
+          </p>
+          <a href="https://zenodo.org/records/17601983" target="_blank">Apri su Zenodo</a>
+        </div>
 
-<div class="card">
-<p><strong>Paradosso della Bolla di Accessibilità (FBD)</strong><br>
-<a href="#">Vai al paper su Zenodo</a></p>
-</div>
+        <div class="card">
+          <div class="label">Segnature cosmiche</div>
+          <h3>FG – Firma Galattica</h3>
+          <p>
+            Sviluppo teorico dedicato alla possibile riconoscibilità di segnali,
+            tracce o impronte rilevabili su scala galattica.
+          </p>
+          <a href="https://zenodo.org/records/19020454" target="_blank">Apri su Zenodo</a>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section>
+      <h2>Metrologia universale</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="label green">Metrologia</div>
+          <h3>AU – Antropic Unit</h3>
+          <p>
+            Sistema universale di misurazione fondato su principi di coerenza fisica,
+            semplicità strutturale e universalità concettuale.
+          </p>
+          <a href="https://zenodo.org/records/16632723" target="_blank">Apri su Zenodo</a>
+        </div>
 
-<div class="section">
-<h2>🧠 Progetto Jarvis</h2>
-<div class="card">
-<p>Sistema cognitivo evolutivo progettato per apprendere in modo continuo, integrare conoscenza e svilupparsi come entità semi-senziente.</p>
-</div>
-</div>
+        <div class="card">
+          <div class="label green">Estensione AU</div>
+          <h3>Estensione Circolare AU</h3>
+          <p>
+            Estensione armonica del sistema AU dedicata alla trattazione circolare e geometrica
+            in un quadro metrologico coerente e π-free.
+          </p>
+          <a href="https://zenodo.org/records/16882501" target="_blank">Apri su Zenodo</a>
+        </div>
+      </div>
+    </section>
 
-<div class="section">
-<h2>🚀 Visione</h2>
-<div class="card">
-<p>Costruire una struttura artificiale capace di apprendere senza sosta, collegare ogni informazione in una rete logica coerente e simulare l’evoluzione della conoscenza.</p>
-</div>
-</div>
+    <section>
+      <h2>Accessibilità biologica e solitudine cosmica</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="label">FBD</div>
+          <h3>Paradosso della Bolla di Accessibilità</h3>
+          <p>
+            Analisi teorica dei limiti spaziali, temporali e biologici che restringono
+            la reale accessibilità tra civiltà intelligenti.
+          </p>
+          <a href="https://zenodo.org/records/19129135" target="_blank">Apri su Zenodo</a>
+        </div>
 
-</div>
+        <div class="card">
+          <div class="label">Accessibilità</div>
+          <h3>Orizzonte Biologico di Accessibilità</h3>
+          <p>
+            Approfondimento dei vincoli biologici e di sopravvivenza che limitano la durata,
+            la sincronizzazione e la raggiungibilità delle civiltà tecnologiche.
+          </p>
+          <a href="https://zenodo.org/records/17762474" target="_blank">Apri su Zenodo</a>
+        </div>
+
+        <div class="card">
+          <div class="label">Solitudine cosmica</div>
+          <h3>Il coraggio di ammettere la solitudine cosmica</h3>
+          <p>
+            Riflessione teorica e argomentativa sul problema della solitudine cosmica
+            e sui limiti reali della presenza di civiltà intelligenti accessibili.
+          </p>
+          <a href="https://zenodo.org/records/17303529" target="_blank">Apri su Zenodo</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tempo e fondamenti ontologici</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="label">Tempo emergente</div>
+          <h3>Il Tempo come Emergenza del Moto</h3>
+          <p>
+            Lavoro ontologico e fisico dedicato all’idea del tempo come fenomeno emergente
+            dal moto e dalle relazioni tra sistemi.
+          </p>
+          <a href="https://zenodo.org/records/18416479" target="_blank">Apri su Zenodo</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Direzione futura</h2>
+      <div class="card">
+        <p>
+          Questo portale rappresenta la prima struttura pubblica del progetto Jarvis.
+          Ulteriori pubblicazioni, collegamenti interni, sezioni dedicate ai progetti
+          e una futura architettura più avanzata verranno integrate progressivamente
+          fino a trasformare il sito in un vero hub del Sistema Bandini.
+        </p>
+      </div>
+    </section>
+
+    <div class="note">
+      Versione iniziale del portale Jarvis. La struttura attuale è pensata come base pubblica
+      ordinata e centralizzata dei principali lavori già pubblicati.
+    </div>
+
+  </main>
+
+  <footer>
+    © Luca Bandini – Jarvis / Sistema Bandini
+  </footer>
 
 </body>
 </html>
