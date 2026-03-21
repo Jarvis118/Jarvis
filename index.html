@@ -209,6 +209,55 @@
   border-radius: 999px;
   background: rgba(110,160,255,0.1);
 }
+    .header-description {
+  margin-top: 18px;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+  line-height: 1.7;
+  color: rgba(235, 242, 255, 0.88);
+}
+
+.header-identity {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.header-identity span {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #dbe7ff;
+  font-size: 14px;
+}
+
+.motto {
+  margin-top: 20px;
+  font-style: italic;
+  color: #a9c4ff;
+}
+
+@media (max-width: 640px) {
+  .header-description {
+    font-size: 17px;
+    line-height: 1.6;
+    padding: 0 8px;
+  }
+
+  .header-identity {
+    gap: 10px;
+  }
+
+  .header-identity span {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+}
   </style>
 </head>
 <body>
