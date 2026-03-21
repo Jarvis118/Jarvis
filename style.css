@@ -91,7 +91,21 @@
   .pubblicazioni-section {
     padding: 60px 18px;
   }
+.pubblicazioni-stats {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: rgba(200, 215, 255, 0.7);
+}
 
+.pubblicazioni-stats span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(110, 160, 255, 0.08);
+  border: 1px solid rgba(130, 170, 255, 0.2);
+}
   .pubblicazioni-header h2 {
     font-size: 1.8rem;
   }
