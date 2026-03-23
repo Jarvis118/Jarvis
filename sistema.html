@@ -1,97 +1,491 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Sistema Alpha-Omega</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema Alpha-Omega | Galassia Alpha-Omega</title>
+  <style>
+    :root {
+      --bg1: #07111f;
+      --bg2: #0d1b2f;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.09);
+      --border: rgba(150, 190, 255, 0.20);
+      --text: #f2f6ff;
+      --muted: rgba(220, 230, 245, 0.78);
+      --accent: #8eb6ff;
+      --accent-strong: #bdd3ff;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      --max: 1180px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top center, rgba(90, 130, 210, 0.22) 0%, transparent 34%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 80px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background-image:
+        linear-gradient(rgba(5, 10, 20, 0.45), rgba(5, 10, 20, 0.88)),
+        url("sistema immagine.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 14% 50%;
+      width: 480px;
+      height: 480px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 34%, transparent 62%);
+      filter: blur(10px);
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--accent-strong);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      margin: 16px auto 0;
+      max-width: 920px;
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      color: var(--muted);
+    }
+
+    .hero-badges {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero-badges span {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #dbe7ff;
+      font-size: 14px;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(160,190,255,0.25);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(160,190,255,0.45);
+      background: rgba(255,255,255,0.09);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: rgba(110,160,255,0.14);
+      border-color: rgba(130,170,255,0.35);
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 24px 70px;
+    }
+
+    section {
+      margin-top: 26px;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 1.8rem;
+      color: #ffffff;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card + .card {
+      margin-top: 18px;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .mini-title {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      color: #ffffff;
+    }
+
+    .quote-box {
+      border-left: 4px solid rgba(142, 182, 255, 0.55);
+      padding: 6px 0 6px 18px;
+      color: #e6efff;
+      font-style: italic;
+      margin-top: 18px;
+    }
+
+    .reading-path {
+      display: grid;
+      gap: 14px;
+    }
+
+    .reading-step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(160,190,255,0.18);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .reading-step strong {
+      color: #ffffff;
+    }
+
+    .back-home {
+      margin-top: 34px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 16px 40px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<header class="hero">
-  <h1>Sistema Alpha-Omega</h1>
-  <p class="subtitle">
-    Architettura teorica unificata delle principali teorie di Luca Bandini
-  </p>
-</header>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Galassia Alpha-Omega</div>
 
-<main class="container">
+      <h1>Sistema Alpha-Omega</h1>
 
-  <!-- INTRO -->
-  <section>
-    <h2 class="section-title">Visione generale</h2>
-    <div class="card">
-      <p>
-        Il Sistema Alpha-Omega rappresenta un quadro teorico integrato che unisce
-        modelli cosmologici, sistemi di misura e limiti fisici dell’interazione tra civiltà.
+      <p class="hero-subtitle">
+        Un ecosistema teorico in evoluzione che unisce cosmologia, misura, geometria,
+        tempo e accessibilità del cosmo in un quadro coerente e progressivo.
       </p>
 
-      <p>
-        Le teorie non sono concepite come elementi indipendenti, ma come componenti
-        di un’unica struttura coerente, sviluppata per offrire una nuova interpretazione
-        della realtà fisica e dell’universo osservabile.
-      </p>
+      <div class="hero-badges">
+        <span>Luca Bandini</span>
+        <span>Ricercatore teorico indipendente</span>
+        <span>ORCID: 0000-0003-4545-9862</span>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="index.html">
+          Torna alla home
+        </a>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- TEORIE PRINCIPALI -->
-  <section>
-    <h2 class="section-title">Teorie principali</h2>
+  <main class="container">
 
-    <div class="grid-2">
-
+    <section>
+      <h2 class="section-title">Cos’è il Sistema Alpha-Omega</h2>
       <div class="card">
-        <h3>RM – Residuo Madre</h3>
-        <p>Modello cosmologico centrale, base teorica dell’intero sistema.</p>
-        <a href="rm.html">Approfondisci →</a>
-      </div>
+        <p class="lead">
+          Il Sistema Alpha-Omega è un ecosistema teorico in evoluzione, concepito
+          per affrontare l’universo non attraverso una singola teoria isolata, ma
+          tramite una struttura coordinata di modelli, estensioni e approfondimenti
+          reciprocamente collegati.
+        </p>
 
+        <p>
+          Al suo interno convivono lavori già formalizzati e pubblicati, insieme a
+          linee di sviluppo ancora aperte, tutti orientati verso un medesimo obiettivo:
+          costruire una comprensione più unificata della realtà fisica, della misura,
+          della geometria, del tempo e dei limiti che regolano l’accessibilità del cosmo.
+        </p>
+
+        <p>
+          In questa prospettiva, Alpha-Omega non rappresenta una semplice raccolta di testi,
+          ma un’architettura concettuale più ampia: un sistema nato per comprendere
+          l’universo attraverso strumenti teorici diversi ma coerenti, ciascuno dedicato
+          a un aspetto specifico dello stesso quadro generale.
+        </p>
+
+        <p>
+          All’interno di questo impianto emerge anche una consapevolezza implicita ma centrale:
+          la condizione umana si colloca in una posizione ambigua, sospesa tra la percezione
+          della propria unicità — per quanto attualmente osservabile — e la sostanziale
+          irrilevanza su scala cosmica. Il sistema assume questa tensione non come semplice
+          riflessione filosofica accessoria, ma come parte integrante del quadro interpretativo.
+        </p>
+
+        <div class="quote-box">
+          Un sistema teorico per comprendere l’universo, sviluppato dall’interno della sua
+          stessa apparente irrilevanza.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Architettura del sistema</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3 class="mini-title">Lavori già sviluppati</h3>
+          <p>
+            Una parte del Sistema Alpha-Omega è già stata formalizzata attraverso
+            pubblicazioni, paper, open review e modelli autonomi che costituiscono
+            il nucleo visibile e verificabile del progetto.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">Lavori in fase di sviluppo</h3>
+          <p>
+            Accanto ai nuclei già pubblicati, il sistema include anche linee teoriche
+            ancora in costruzione, destinate a espandere e completare progressivamente
+            l’architettura generale.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Teorie principali</h2>
+      <div class="grid-2">
+
+        <div class="card">
+          <h3 class="mini-title">RM – Teoria del Residuo Madre</h3>
+          <p>
+            Nucleo cosmologico centrale del sistema e base teorica da cui si diramano
+            molte delle estensioni successive.
+          </p>
+          <a href="rm.html">Approfondisci →</a>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">FBD – Paradosso della Bolla di Accessibilità</h3>
+          <p>
+            Modello dedicato ai limiti fisici, temporali ed energetici della
+            raggiungibilità tra civiltà intelligenti nell’universo.
+          </p>
+          <a href="fbd.html">Approfondisci →</a>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">AU – Antropic Unit</h3>
+          <p>
+            Sistema universale di misurazione fondato su riferimenti fisici non arbitrari,
+            pensato per superare la convenzionalità delle unità storiche.
+          </p>
+          <a href="au.html">Approfondisci →</a>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">AU – Estensione Circolare</h3>
+          <p>
+            Completamento geometrico del sistema AU, con approccio π-free per la gestione
+            armonica delle grandezze circolari.
+          </p>
+          <a href="au-estensione-circolare.html">Approfondisci →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Lavori collegati e sviluppi del sistema</h2>
       <div class="card">
-        <h3>FBD – Bolla di Accessibilità</h3>
-        <p>Definisce i limiti fisici e temporali del contatto tra civiltà intelligenti.</p>
-        <a href="fbd.html">Approfondisci →</a>
-      </div>
+        <p class="lead">
+          Oltre alle teorie principali, il Sistema Alpha-Omega comprende anche lavori
+          complementari, approfondimenti e sviluppi laterali che contribuiscono alla
+          sua crescita complessiva.
+        </p>
 
+        <div class="reading-path">
+          <div class="reading-step">
+            <strong>RM Public Open Review</strong><br>
+            Documento collegato alla dimensione di confronto pubblico e revisione aperta del nucleo cosmologico.
+          </div>
+
+          <div class="reading-step">
+            <strong>FG – Firma Galattica</strong><br>
+            Sviluppo collegato alla lettura cosmologica delle tracce osservabili e alla struttura generale del sistema.
+          </div>
+
+          <div class="reading-step">
+            <strong>L’Orizzonte Biologico di Accessibilità</strong><br>
+            Approfondimento del limite biologico e civilizzativo della propagazione nel cosmo.
+          </div>
+
+          <div class="reading-step">
+            <strong>Il coraggio di ammettere la solitudine cosmica</strong><br>
+            Riflessione connessa alle implicazioni teoriche ed esistenziali del silenzio cosmico.
+          </div>
+
+          <div class="reading-step">
+            <strong>Il Tempo come Emergenza del Moto</strong><br>
+            Sviluppo ontologico e teorico dedicato alla natura emergente del tempo.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Come leggere il sistema</h2>
       <div class="card">
-        <h3>AU – Antropic Unit</h3>
-        <p>Sistema universale di misura basato su riferimenti naturali non arbitrari.</p>
-        <a href="au.html">Approfondisci →</a>
-      </div>
+        <div class="reading-path">
 
+          <div class="reading-step">
+            <strong>Primo passo:</strong> considerare Alpha-Omega non come una semplice
+            raccolta di paper, ma come una struttura unificata in cui ogni lavoro
+            svolge una funzione specifica.
+          </div>
+
+          <div class="reading-step">
+            <strong>Secondo passo:</strong> distinguere tra teorie principali, che
+            costituiscono il nucleo portante del sistema, e lavori collegati, che ne
+            rappresentano gli approfondimenti e le ramificazioni.
+          </div>
+
+          <div class="reading-step">
+            <strong>Terzo passo:</strong> leggere il sistema come un progetto aperto,
+            in cui i lavori già sviluppati convivono con linee teoriche ancora in
+            costruzione, tutte orientate verso una maggiore unificazione del quadro generale.
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Nota di orientamento</h2>
       <div class="card">
-        <h3>AU – Estensione Circolare</h3>
-        <p>Estensione π-free per la gestione delle grandezze geometriche circolari.</p>
-        <a href="au-estensione-circolare.html">Approfondisci →</a>
-      </div>
+        <p>
+          Questa pagina ha funzione introduttiva e sintetica. Non sostituisce i singoli
+          lavori scientifici e teorici, ma ne chiarisce la posizione reciproca all’interno
+          del Sistema Alpha-Omega.
+        </p>
 
+        <p>
+          Le pagine dedicate alle quattro teorie principali rappresentano i punti di accesso
+          centrali del sito. Gli altri lavori costituiscono invece l’indice informativo degli
+          sviluppi già emersi o in progressiva elaborazione, senza sostituire i riferimenti
+          principali già presenti nella homepage.
+        </p>
+      </div>
+    </section>
+
+    <div class="back-home hero-actions">
+      <a class="btn btn-primary" href="index.html">
+        Torna alla home
+      </a>
     </div>
-  </section>
 
-  <!-- TEORIE COLLEGATE -->
-  <section>
-    <h2 class="section-title">Sviluppi e teorie collegate</h2>
+  </main>
 
-    <div class="card">
-      <p>
-        Il sistema include ulteriori sviluppi teorici e modelli in fase di espansione,
-        tra cui:
-      </p>
-
-      <ul>
-        <li>Tempo come emergenza del moto</li>
-        <li>Orizzonte Biologico di Accessibilità</li>
-        <li>Firma Galattica</li>
-        <li>Tavola Cosmologica Periodica</li>
-      </ul>
-
-      <p>
-        Questi lavori contribuiscono all’evoluzione progressiva del sistema e saranno
-        integrati in modo sempre più strutturato.
-      </p>
-    </div>
-  </section>
-
-</main>
+  <footer class="footer">
+    © Luca Bandini — Jarvis / Galassia Alpha-Omega
+  </footer>
 
 </body>
 </html>
