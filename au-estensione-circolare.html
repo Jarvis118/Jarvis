@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AU – Estensione Circolare | Galassia Alpha-Omega</title>
+  <style>
+    :root {
+      --bg1: #07111f;
+      --bg2: #0d1b2f;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.09);
+      --border: rgba(150, 190, 255, 0.20);
+      --text: #f2f6ff;
+      --muted: rgba(220, 230, 245, 0.78);
+      --accent: #8eb6ff;
+      --accent-strong: #bdd3ff;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top center, rgba(90, 130, 210, 0.22) 0%, transparent 34%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 80px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background-image:
+        linear-gradient(rgba(5, 10, 20, 0.40), rgba(5, 10, 20, 0.85)),
+        url("estensione circolare immagine.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 14% 50%;
+      width: 480px;
+      height: 480px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 34%, transparent 62%);
+      filter: blur(10px);
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--accent-strong);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      margin: 16px auto 0;
+      max-width: 900px;
+      font-size: clamp(1rem, 2vw, 1.28rem);
+      color: var(--muted);
+    }
+
+    .hero-badges {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero-badges span {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #dbe7ff;
+      font-size: 14px;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(160,190,255,0.25);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(160,190,255,0.45);
+      background: rgba(255,255,255,0.09);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: rgba(110,160,255,0.14);
+      border-color: rgba(130,170,255,0.35);
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 24px 70px;
+    }
+
+    section {
+      margin-top: 26px;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 1.8rem;
+      color: #ffffff;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card + .card {
+      margin-top: 18px;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .mini-title {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      color: #ffffff;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.04rem;
+      color: #ffffff;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .doi {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--accent);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
+    .reading-path {
+      display: grid;
+      gap: 14px;
+    }
+
+    .reading-step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(160,190,255,0.18);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .reading-step strong {
+      color: #ffffff;
+    }
+
+    .quote-box {
+      border-left: 4px solid rgba(142, 182, 255, 0.55);
+      padding: 6px 0 6px 18px;
+      color: #e6efff;
+      font-style: italic;
+    }
+
+    .back-home {
+      margin-top: 34px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 16px 40px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Galassia Alpha-Omega</div>
+
+      <h1>AU – Estensione Circolare</h1>
+
+      <p class="hero-subtitle">
+        Estensione geometrica del sistema AU, pensata per riformulare circonferenze,
+        archi, aree e relazioni angolari in una struttura più armonica e π-free.
+      </p>
+
+      <div class="hero-badges">
+        <span>Luca Bandini</span>
+        <span>Ricercatore teorico indipendente</span>
+        <span>ORCID: 0000-0003-4545-9862</span>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://zenodo.org/records/16882501" target="_blank" rel="noopener noreferrer">
+          Leggi AU – Estensione Circolare su Zenodo
+        </a>
+        <a class="btn" href="index.html">
+          Torna alla home
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section>
+      <h2 class="section-title">Cos’è l’Estensione Circolare</h2>
+      <div class="card">
+        <p class="lead">
+          L’AU – Estensione Circolare amplia il sistema Antropic Unit introducendo
+          una formulazione geometrica centrata sulle relazioni circolari, con l’obiettivo
+          di rendere più diretta, uniforme e intuitiva la descrizione di circonferenze,
+          archi, angoli e superfici derivate.
+        </p>
+
+        <p>
+          Il progetto nasce dall’esigenza di superare la dipendenza esplicita da π
+          come costante operativa centrale, sostituendola con una struttura interna
+          in cui la geometria del cerchio venga trattata attraverso unità armoniche
+          direttamente integrate nel sistema AU.
+        </p>
+
+        <div class="quote-box">
+          L’Estensione Circolare non elimina la validità matematica di π, ma ne
+          riduce la centralità operativa costruendo un sistema più lineare e leggibile.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Punti centrali del sistema</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="mini-title">1. Geometria circolare armonizzata</h3>
+          <p>
+            La struttura propone un trattamento del cerchio basato su relazioni dirette,
+            interne al sistema, evitando il ricorso continuo a passaggi esterni o
+            costanti introdotte solo come mediazione storica.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">2. Approccio π-free</h3>
+          <p>
+            L’obiettivo è offrire una formulazione in cui le grandezze circolari
+            possano essere espresse e manipolate in modo coerente senza dipendere
+            ogni volta dall’apparizione esplicita di π.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">3. Estensione naturale dell’AU</h3>
+          <p>
+            Questa proposta non è un sistema separato, ma una derivazione coerente
+            del progetto AU, che ne amplia la portata geometrica e la flessibilità
+            applicativa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Ruolo dell’AU – Estensione Circolare nella Galassia Alpha-Omega</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3 class="mini-title">Funzione teorica</h3>
+          <p>
+            L’Estensione Circolare rappresenta il tentativo di dare al sistema AU
+            una continuità geometrica più profonda, capace di integrare la misura
+            lineare e quella curvilinea dentro un unico quadro metrologico coerente.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">Funzione strutturale</h3>
+          <p>
+            Nel sito, questa pagina organizza e presenta l’estensione come sviluppo
+            autonomo ma collegato, chiarendone la posizione come modulo derivato
+            dell’impianto metrologico generale.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Assi principali di lettura</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="mini-title">Circonferenza</h3>
+          <p>
+            Il cerchio viene reinterpretato all’interno di una logica unitaria,
+            dove la grandezza circolare non appare come eccezione ma come prosecuzione
+            naturale del sistema di base.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">Angolo e arco</h3>
+          <p>
+            Le relazioni angolari vengono lette in funzione di porzioni operative
+            del giro, semplificando il collegamento tra rotazione, arco e misura.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">Area e struttura derivata</h3>
+          <p>
+            Anche le superfici circolari entrano così in una grammatica interna
+            più uniforme, adatta a futuri sviluppi matematici e cosmologici.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Versioni pubblicate e materiali collegati</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <h3>AU – Estensione Circolare: sistema metrologico π-free</h3>
+          <p>
+            Testo principale di riferimento dell’estensione, con impostazione teorica,
+            definizioni operative e confronto con l’approccio convenzionale.
+          </p>
+          <a class="doi" href="https://zenodo.org/records/16882501" target="_blank" rel="noopener noreferrer">
+            DOI / Zenodo: 10.5281/zenodo.16882501
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Come leggere l’Estensione Circolare</h2>
+      <div class="card">
+        <div class="reading-path">
+          <div class="reading-step">
+            <strong>Primo passo:</strong> leggere l’estensione come prosecuzione diretta
+            del sistema AU, non come proposta indipendente o scollegata.
+          </div>
+
+          <div class="reading-step">
+            <strong>Secondo passo:</strong> comprendere il significato dell’approccio
+            π-free in senso operativo, non come negazione matematica della costante.
+          </div>
+
+          <div class="reading-step">
+            <strong>Terzo passo:</strong> collocare l’intero progetto nel quadro più ampio
+            della riformulazione armonica della misura.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Nota di orientamento</h2>
+      <div class="card">
+        <p>
+          Questa pagina ha funzione introduttiva e strutturale. Non sostituisce il
+          testo pubblicato su Zenodo, ma ne sintetizza l’idea centrale e ne facilita
+          l’accesso all’interno dell’architettura generale del sito.
+        </p>
+
+        <p>
+          In seguito potrà essere ampliata con esempi operativi, formule dedicate,
+          tavole comparative e collegamenti con le future evoluzioni matematiche del sistema AU.
+        </p>
+      </div>
+    </section>
+
+    <div class="back-home hero-actions">
+      <a class="btn btn-primary" href="https://zenodo.org/records/16882501" target="_blank" rel="noopener noreferrer">
+        Apri AU – Estensione Circolare su Zenodo
+      </a>
+      <a class="btn" href="index.html">
+        Torna alla home
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    © Luca Bandini — Jarvis / Galassia Alpha-Omega
+  </footer>
+
+</body>
+</html>
