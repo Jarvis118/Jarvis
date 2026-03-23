@@ -1,74 +1,546 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>FBD – Bolla di Accessibilità</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RM – Teoria del Residuo Madre | Galassia Alpha-Omega</title>
+  <style>
+    :root {
+      --bg1: #07111f;
+      --bg2: #0d1b2f;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.09);
+      --border: rgba(150, 190, 255, 0.20);
+      --text: #f2f6ff;
+      --muted: rgba(220, 230, 245, 0.78);
+      --accent: #8eb6ff;
+      --accent-strong: #bdd3ff;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      --max: 1180px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top center, rgba(90, 130, 210, 0.22) 0%, transparent 34%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+   .hero {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px 60px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  background-image:
+    linear-gradient(rgba(5, 10, 20, 0.25), rgba(5, 10, 20, 0.85)),
+   url("RM immagine.png");
+
+  background-size: cover;
+  background-position: center 5%;
+  background-repeat: no-repeat;
+}
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 14% 50%;
+      width: 480px;
+      height: 480px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 34%, transparent 62%);
+      filter: blur(10px);
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--accent-strong);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      margin: 16px auto 0;
+      max-width: 900px;
+      font-size: clamp(1rem, 2vw, 1.28rem);
+      color: var(--muted);
+    }
+
+    .hero-badges {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero-badges span {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #dbe7ff;
+      font-size: 14px;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(160,190,255,0.25);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(160,190,255,0.45);
+      background: rgba(255,255,255,0.09);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: rgba(110,160,255,0.14);
+      border-color: rgba(130,170,255,0.35);
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 24px 70px;
+    }
+
+    section {
+      margin-top: 26px;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 1.8rem;
+      color: #ffffff;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card + .card {
+      margin-top: 18px;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .mini-title {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      color: #ffffff;
+    }
+
+    ul.clean {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    ul.clean li + li {
+      margin-top: 8px;
+    }
+
+    .quote-box {
+      border-left: 4px solid rgba(142, 182, 255, 0.55);
+      padding: 6px 0 6px 18px;
+      color: #e6efff;
+      font-style: italic;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.04rem;
+      color: #ffffff;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .doi {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--accent);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
+    .reading-path {
+      display: grid;
+      gap: 14px;
+    }
+
+    .reading-step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(160,190,255,0.18);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .reading-step strong {
+      color: #ffffff;
+    }
+
+    .back-home {
+      margin-top: 34px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 16px 40px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<!-- HERO -->
-<section class="hero" style="
-  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('FBD immagine.png');
-  background-position: center center;
-  background-size: cover;
-">
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Galassia Alpha-Omega</div>
 
-  <div class="hero-content">
-    <h1>FBD – Bolla di Accessibilità</h1>
-    <p>Paradosso Fermi–Bandini–Drake</p>
-  </div>
+      <h1>Teoria del Residuo Madre (RM)</h1>
 
-</section>
+      <p class="hero-subtitle">
+        Nucleo teorico centrale della Galassia Alpha-Omega e base cosmologica
+        dell’impianto sviluppato da Luca Bandini.
+      </p>
 
-<!-- CONTENUTO -->
-<section class="content">
+      <div class="hero-badges">
+        <span>Luca Bandini</span>
+        <span>Ricercatore teorico indipendente</span>
+        <span>ORCID: 0000-0003-4545-9862</span>
+      </div>
 
-  <h2>Il problema</h2>
-  <p>
-    L’universo osservabile contiene centinaia di miliardi di galassie, ognuna con miliardi di stelle e pianeti.
-    In questo scenario, la probabilità di vita intelligente dovrebbe essere elevata.
-    Eppure, non osserviamo alcuna evidenza diretta di civiltà extraterrestri.
-  </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://zenodo.org/records/18714894" target="_blank" rel="noopener noreferrer">
+          Leggi RM v10 su Zenodo
+        </a>
+        <a class="btn" href="index.html">
+          Torna alla home
+        </a>
+      </div>
+    </div>
+  </header>
 
-  <h2>Il Paradosso</h2>
-  <p>
-    Il paradosso nasce dall’apparente contraddizione tra:
-  </p>
-  <ul>
-    <li>l’elevata probabilità statistica di vita intelligente</li>
-    <li>l’assenza totale di contatti osservabili</li>
-  </ul>
+  <main class="container">
 
-  <h2>La soluzione proposta</h2>
-  <p>
-    Il modello FBD introduce il concetto di <strong>Bolla di Accessibilità</strong>:
-    ogni civiltà è confinata in una regione dello spazio-tempo limitata dalla propria capacità tecnologica,
-    dalla velocità di espansione e dalla durata della propria esistenza.
-  </p>
+    <section>
+      <h2 class="section-title">Cos’è la RM</h2>
+      <div class="card">
+        <p class="lead">
+          La Teoria del Residuo Madre propone una rilettura dell’assetto cosmologico
+          in cui l’universo osservabile non viene interpretato come il semplice esito
+          di un’origine esaurita, ma come manifestazione di un processo ancora attivo,
+          persistente e strutturalmente generativo.
+        </p>
 
-  <h2>Limiti fisici</h2>
-  <ul>
-    <li>velocità subluminali</li>
-    <li>tempi evolutivi delle civiltà</li>
-    <li>distanze cosmiche</li>
-    <li>eventi catastrofici</li>
-  </ul>
+        <p>
+          All’interno della Galassia Alpha-Omega, la RM occupa il ruolo di teoria
+          fondativa: è il punto da cui si diramano le estensioni successive,
+          i modelli interpretativi collegati e i percorsi di approfondimento
+          sviluppati negli altri lavori pubblicati.
+        </p>
 
-  <h2>Conseguenze</h2>
-  <p>
-    Le civiltà non si incontrano non perché siano rare,
-    ma perché le loro bolle di espansione non si sovrappongono nello spazio e nel tempo.
-  </p>
+        <div class="quote-box">
+          La RM non rappresenta una semplice ipotesi isolata, ma il centro teorico
+          da cui prende forma l’intero impianto cosmologico successivo.
+        </div>
+      </div>
+    </section>
 
-  <h2>Implicazioni cosmologiche</h2>
-  <p>
-    Il modello FBD fornisce una possibile risposta al paradosso di Fermi,
-    integrando limiti fisici, temporali e tecnologici in un unico framework coerente.
-  </p>
+    <section>
+      <h2 class="section-title">Punti centrali della teoria</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="mini-title">1. Nucleo cosmologico attivo</h3>
+          <p>
+            La teoria interpreta l’origine cosmologica non come evento definitivamente
+            concluso, ma come condizione ancora capace di produrre effetti osservabili
+            nella struttura dell’universo.
+          </p>
+        </div>
 
-</section>
+        <div class="card">
+          <h3 class="mini-title">2. Rilettura del quadro standard</h3>
+          <p>
+            La RM si colloca come alternativa teorica ai modelli che richiedono
+            materia oscura ed energia oscura come elementi interpretativi necessari
+            e separati.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">3. Impianto in evoluzione progressiva</h3>
+          <p>
+            La teoria è stata formalizzata attraverso più versioni pubblicate,
+            con ampliamenti, chiarimenti, rafforzamenti matematici e passaggi
+            di confronto pubblico.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Ruolo della RM nella Galassia Alpha-Omega</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3 class="mini-title">Funzione teorica</h3>
+          <p>
+            La RM costituisce il baricentro cosmologico dell’intero ecosistema.
+            È il lavoro da cui si comprende meglio la direzione generale della ricerca,
+            il quadro concettuale di base e la logica delle estensioni successive.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">Funzione strutturale</h3>
+          <p>
+            In termini di navigazione del sito, questa pagina non sostituisce Zenodo:
+            ne rappresenta invece il punto di accesso introduttivo, ordinato e
+            contestualizzato, utile per orientare la lettura prima dell’accesso al testo completo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Versioni pubblicate e materiali collegati</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <h3>RM v10 — versione principale di riferimento</h3>
+          <p>
+            La versione più avanzata attualmente pubblicata, da considerare come punto
+            di accesso prioritario alla teoria nella sua forma più matura.
+          </p>
+          <a class="doi" href="https://zenodo.org/records/18714894" target="_blank" rel="noopener noreferrer">
+            DOI / Zenodo: 10.5281/zenodo.18714894
+          </a>
+        </div>
+
+        <div class="timeline-item">
+          <h3>RM v8</h3>
+          <p>
+            Tappa intermedia significativa nell’evoluzione del modello, utile per seguire
+            lo sviluppo progressivo dell’impianto teorico.
+          </p>
+          <a class="doi" href="https://zenodo.org/records/18714756" target="_blank" rel="noopener noreferrer">
+            DOI / Zenodo: 10.5281/zenodo.18714756
+          </a>
+        </div>
+
+        <div class="timeline-item">
+          <h3>RM v7.1</h3>
+          <p>
+            Versione di consolidamento con funzione importante nel percorso di chiarimento,
+            formalizzazione e rafforzamento dell’assetto teorico.
+          </p>
+          <a class="doi" href="https://zenodo.org/records/18432276" target="_blank" rel="noopener noreferrer">
+            DOI / Zenodo: 10.5281/zenodo.18432276
+          </a>
+        </div>
+
+        <div class="timeline-item">
+          <h3>RM v7</h3>
+          <p>
+            Versione precedente utile per ricostruire la progressione interna della teoria
+            e il percorso di maturazione dei principali nuclei concettuali.
+          </p>
+          <a class="doi" href="https://zenodo.org/records/17830414" target="_blank" rel="noopener noreferrer">
+            DOI / Zenodo: 10.5281/zenodo.17830414
+          </a>
+        </div>
+
+        <div class="timeline-item">
+          <h3>RM v6</h3>
+          <p>
+            Uno dei passaggi iniziali del ciclo maturo della teoria, utile come punto di
+            retrospettiva per comprendere l’evoluzione delle versioni più recenti.
+          </p>
+          <a class="doi" href="https://zenodo.org/records/17650686" target="_blank" rel="noopener noreferrer">
+            DOI / Zenodo: 10.5281/zenodo.17650686
+          </a>
+        </div>
+
+        <div class="timeline-item">
+          <h3>RM Public Open Review</h3>
+          <p>
+            Documento collegato alla dimensione di confronto pubblico e revisione aperta,
+            importante per comprendere il lato dialogico e critico del progetto teorico.
+          </p>
+          <a class="doi" href="https://zenodo.org/records/17601983" target="_blank" rel="noopener noreferrer">
+            DOI / Zenodo: 10.5281/zenodo.17601983
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Come leggere la RM</h2>
+      <div class="card">
+        <div class="reading-path">
+          <div class="reading-step">
+            <strong>Primo passo:</strong> partire dalla RM v10, che rappresenta
+            il riferimento principale e la forma più completa del modello.
+          </div>
+
+          <div class="reading-step">
+            <strong>Secondo passo:</strong> consultare la Public Open Review
+            per collocare la teoria anche nella dimensione del confronto critico.
+          </div>
+
+          <div class="reading-step">
+            <strong>Terzo passo:</strong> risalire, solo se necessario,
+            alle versioni precedenti per ricostruire la genesi e la progressione dell’impianto teorico.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Nota di orientamento</h2>
+      <div class="card">
+        <p>
+          Questa pagina ha funzione introduttiva e strutturale. Non sostituisce i testi
+          scientifici pubblicati su Zenodo, ma li organizza e li contestualizza
+          all’interno della Galassia Alpha-Omega, offrendo un punto di accesso più chiaro,
+          progressivo e leggibile.
+        </p>
+
+        <p>
+          Nelle fasi successive il contenuto potrà essere ampliato con sezioni dedicate
+          agli aspetti matematici, ai confronti con il quadro standard, ai collegamenti
+          con Tempo Emergente, Firma Galattica e agli altri sviluppi teorici correlati.
+        </p>
+      </div>
+    </section>
+
+    <div class="back-home hero-actions">
+      <a class="btn btn-primary" href="https://zenodo.org/records/18714894" target="_blank" rel="noopener noreferrer">
+        Apri RM v10 su Zenodo
+      </a>
+      <a class="btn" href="https://zenodo.org/records/17601983" target="_blank" rel="noopener noreferrer">
+        Apri RM Public Open Review
+      </a>
+      <a class="btn" href="index.html">
+        Torna alla home
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    © Luca Bandini — Jarvis / Galassia Alpha-Omega
+  </footer>
 
 </body>
 </html>
